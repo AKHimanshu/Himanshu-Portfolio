@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bmi Calculator</title>
+    <style>
+        .container{
+            height: 600px;
+            width: 90%;
+            background-color: #f1f1f1;
+            font-family: Arial;
+        }
+        .mainHeading{
+            color: #ae0000;
+            font-size: 30px;
+            margin: 10px;
+            padding-top: 20px;
+        }
+        .subHeading{
+            color: #ae0000;
+            font-size: 20px;
+            margin: 10px;
+           
+        }
+        .subContainer{
+            background-color: white;
+            margin-left: 10px;
+            margin-right: 10px;
+            display: grid;
+            grid-template-columns: 8fr 4fr;
+            height: 400px;
+            margin-top: 90px;
+        }
+        .subContainer2{
+            margin: 10px;
+        }
+        .bmiIndicater{
+            background-color:  #dbdbdb;
+            height: 90%;
+            margin-bottom: 10px;
+        }
+        .genderAge{
+            margin-top: 20px;
+            margin-left: 20px;
+            display: grid;
+            grid-template-columns: 6fr 6fr;
+        }
+        .heightWeight{
+            margin-top: 20px;
+            margin-left: 20px;
+            display: grid;
+            grid-template-columns: 6fr 6fr;
+        }
+        .heightBorder{
+            border-bottom: 2px solid gray;
+            width: 200px;
+        }
+        .buttonContainer{
+            margin-top: 100px;
+            margin-left: 300px;
+            border-radius: 15px;
+            background-color: #e77817;
+            padding: 5px;
+            width: 150px;
+            text-align: center;
+            color: white;
+        }
+        #BmiData{
+            padding-top: 20%;
+            padding-left: 40%;
+        }
+        #BmiRange{
+            margin-top: 4%;
+            padding: 5%;
+        }
+    </style>
+    <script>
+        function calculateBMI(){
+            var w=parseFloat(document.getElementById("weight").value);
+            var h=parseFloat(document.getElementById("height").value);
+            var optMale = document.getElementById("optMale");
+            var optFemale = document.getElementById("optFemale");
+            var value = document.getElementById("YourValue");
+            var bmi;
+           if(optMale.checked){
+                bmi=(w/Math.pow(h*0.3048,2)).toFixed(2);
+                 if(bmi>=1 && bmi<=18.5){
+                value.style.marginLeft = "10%";
+                } else if(bmi>19 && bmi<=25) {
+                value.style.marginLeft = "35%";
+                }
+                else if(bmi>26 && bmi<=30) {
+                value.style.marginLeft = "62%";
+                }
+                else if(bmi>30) {
+                value.style.marginLeft = "85%";
+                }
+           }
+          if(optFemale.checked){
+            bmi=(w/Math.pow(h*0.3048,2)).toFixed(2);
+                 if(bmi>=1 && bmi<=18.5){
+                value.style.marginLeft = "10%";
+                } else if(bmi>19 && bmi<=25) {
+                value.style.marginLeft = "35%";
+                }
+                else if(bmi>26 && bmi<=30) {
+                value.style.marginLeft = "62%";
+                }
+                else if(bmi>30) {
+                value.style.marginLeft = "85%";
+                }
+          }
+          document.getElementById("BmiData").innerHTML=bmi;
+        }
+    </script>
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="mainHeading">BMI Calculator</div>
+        <div class="subHeading">Body Mass  Index</div>
+        <div class="subContainer">
+            <div class="subContainer1">
+                <div class="genderAge">
+                    <div>
+                        <div>Gender</div>
+                        <div><input type="radio" name="Gender"  id="optMale" >Male
+                            <input type="radio" name="Gender"  id="optFemale">Female
+                        </div>
+                    </div>
+                    <div>
+                        <div>AGE</div>
+                        <div><input type="number" id="age" placeholder="Years"> <span style="color: gray; font-style: italic;">between 2 yrs to 120 yrs</span></div>
+                    </div>
+                </div>
+                <div class="heightWeight">
+                    <div>
+                        <div>Height</div>
+                        <div class="heightBorder"><input type="number" id="height" placeholder="FT IN" style="border: none;"></div>
+                        <div style="color: blue; font-size: 10px; text-decoration: underline;">Switch to cm.</div>
+                    </div>
+                    <div>
+                        <div>Weight</div>
+                        <div><input type="number" id="weight" placeholder="in kgs"></div>
+                    </div>
+                </div>
+                <div class="buttonContainer">
+                    <div onclick="calculateBMI()">Calculate</div>
+                </div>
+            </div>
+            <div class="subContainer2">
+                <div class="bmiIndicater">
+                    <div id="BmiData"></div>
+                    <div id="BmiRange">
+                        <div class="progress w-100">
+                            <div class="progress-bar bg-dark" style="width: 25%;">
+                                Underweight
+                            </div>
+                            <div class="progress-bar bg-info ms-1" style="width: 25%;">
+                                Normal
+                            </div>
+                            <div class="progress-bar bg-warning ms-1" style="width: 25%;">
+                                Overweight
+                            </div>
+                            <div class="progress-bar bg-danger ms-1" style="width: 25%;">
+                                Obsese
+                            </div>
+                        </div>
+                        <div id="YourValue">
+                            <span class="bi bi-caret-down-fill"></span>
+                            <div>You</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="font-style: italic;">Healthy BMI range: 18.5 kg/m2 - 25 kg/m2</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
